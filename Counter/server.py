@@ -5,7 +5,11 @@ app.secret_key = 'elsecreto'
 
 @app.route('/')  
 def visits():
-    session['counter'] += 1
+    if 'counter' not in session:
+        session['counter'] = 1
+    else:
+        session['counter'] += 1
+        
     return render_template('index.html', counter = session['counter'])
 
 @app.route('/destroy_session')
